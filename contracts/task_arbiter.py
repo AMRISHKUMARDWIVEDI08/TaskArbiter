@@ -15,6 +15,7 @@ class TaskArbiter(gl.Contract):
     def __init__(self):
         pass
 
+    @gl.public.write
     def create_task(self, task_id: str, requirement_text: str) -> None:
         assert task_id != "", "task_id required"
         assert requirement_text != "", "requirements required"
@@ -22,6 +23,7 @@ class TaskArbiter(gl.Contract):
         self.tasks[task_id] = "OPEN"
         self.requirements[task_id] = requirement_text
 
+    @gl.public.write
     def submit_evidence(self, task_id: str, evidence_url: str) -> None:
         assert self.tasks[task_id] == "OPEN", "task not open"
         assert evidence_url.startswith("http://") or evidence_url.startswith("https://"), "public evidence URL required"
