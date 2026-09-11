@@ -77,3 +77,15 @@ Do not invent evidence. If the page cannot be inspected reliably, use UNDETERMIN
             "evidence": self.evidence[task_id],
             "verdict": self.verdicts[task_id],
         }
+
+    @gl.public.write
+    def request_revision(self, task_id: str) -> None:
+        assert self.tasks[task_id] == "FINALIZED", "task not finalized"
+        verdict = self.verdicts[task_id]
+        assert "REVISION_REQUIRED" in verdict, "revision not available"
+        self.tasks[task_id] = "OPEN"
+        self.verdicts[task_id] = ""
+
+    @gl.public.view
+    def get_verdict(self, task_id: str) -> str:
+        return self.verdicts[task_id]
