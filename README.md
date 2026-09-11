@@ -49,3 +49,14 @@ The first milestone is a small end-to-end adjudication loop. Automatic real-mone
 ## License
 
 MIT
+
+## Contract lifecycle
+
+1. creator calls create_task with a unique task id and pre-agreed requirements
+2. submitter adds a public evidence URL while the task is OPEN
+3. evaluate reads the public evidence and produces a structured verdict through GenLayer non-deterministic execution and equivalence validation
+4. the finalized verdict is stored on-chain
+5. REVISION_REQUIRED tasks may be reopened with request_revision and evaluated again
+
+## Current limitation
+The MVP stores one evidence URL and a compact requirement string. Multi-requirement structured storage, deadlines, authorization roles, and payout/escrow are deliberately deferred until the core adjudication loop is validated.
