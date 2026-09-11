@@ -58,7 +58,7 @@ def test_evaluation_with_web_and_llm_mocks(
     contract.submit_evidence(task_id, "https://example.com/demo")
 
     direct_vm.mock_web(
-        r"example\\.com/demo",
+        r"example\.com/demo",
         {
             "status": 200,
             "body": "README exists. Public demo exists at https://demo.example.com",
@@ -89,7 +89,6 @@ def test_getters_for_missing_task_return_safe_defaults(
     direct_vm, direct_deploy, direct_alice
 ):
     contract = direct_deploy("contracts/task_arbiter.py")
-    direct_vm.sender = direct_alice
 
     assert contract.get_verdict(404) == "UNDETERMINED"
     assert contract.get_evidence(404) == ""
